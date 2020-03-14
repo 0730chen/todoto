@@ -2,6 +2,7 @@ import React from "react";
 import TodoInput from "./todoInput";
 import axios from '../../config/axios'
 import './todos.scss'
+import TodoItem from "./todoItem";
 
 interface TodoState {
     todos: any[]
@@ -43,6 +44,24 @@ class Todo extends React.Component <any, TodoState> {
             throw Error(e)
         }
     }
+    updateTodo = async (id: number, params: any) => {
+        const {todos} = this.state
+        try {
+            const response = await axios.put(`todos/${id}`, params)
+            const newTodos = todos.map(t => {
+                if (id === t.id) {
+                    return response.data.resource
+                } else {
+                    return t
+                }
+            })
+            this.setState(() => ({
+                todos: newTodos
+            }))
+        } catch (e) {
+            throw Error(e)
+        }
+    }
 
     render() {
         return (
@@ -51,9 +70,7 @@ class Todo extends React.Component <any, TodoState> {
                     this.addTodo(params)
                 }}/>
                 <div>
-                    {this.state.todos.map((t) => {
-                        return <li key={t.id}>{t.description}</li>
-                    })}
+                    {this.state.todos.map((t) => <TodoItem key={t.id} {...t} update={this.updateTodo}/>)}
                 </div>
             </div>
         )
