@@ -40,14 +40,13 @@ class SignUp extends React.Component<any> {
     submit = async () => {
         // @ts-ignore
         const {account, password, passwordConformation} = this.state;
-        console.log(account, password, passwordConformation);
         try {
             await axios.post('sign_up/user', {
                 account,
                 password,
                 password_confirmation: passwordConformation,
             })
-            console.log('ok')
+            this.props.history.push('/')
         } catch (e) {
             throw Error(e)
         }

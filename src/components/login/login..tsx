@@ -37,11 +37,11 @@ class Login extends React.Component<any> {
         // @ts-ignore
         const {account, password} = this.state;
         try {
-            await axios.post('sign_up/user', {
+            await axios.post('sign_in/user', {
                 account,
                 password,
             })
-            console.log('ok')
+            this.props.history.push('/')
         } catch (e) {
             throw Error(e)
         }

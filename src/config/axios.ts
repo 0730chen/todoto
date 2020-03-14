@@ -32,6 +32,9 @@ instance.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // Do something with response error
+    if (error.response.status === 401) {
+        console.log('重定向')
+    }
     return Promise.reject(error);
 });
 
