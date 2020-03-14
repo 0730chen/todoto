@@ -1,15 +1,24 @@
-import React, { Component } from 'react';
-import Button from 'antd/es/button';
+import React, {Component} from 'react';
+import {
+    BrowserRouter as Router,
+    Route,
+} from "react-router-dom";
 import './App.css';
+import Index from "./components/index";
+import Login from "./components/login/login.";
+import SignUp from "./components/signUp/signUp";
 
-class App extends Component {
-  render() {
+function App() {
     return (
-        <div className="App">
-          <Button type="primary">Button</Button>
-        </div>
+        <Router>
+            <Route path="/" exact={true} component={Index}>
+            </Route>
+            <Route path="/login" component={Login}>
+            </Route>
+            <Route path="/signup" component={SignUp}>
+            </Route>
+        </Router>
     );
-  }
 }
 
 export default App;
