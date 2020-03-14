@@ -1,6 +1,10 @@
 import React from "react";
-import {Button} from "antd";
+import {Dropdown, Menu} from "antd";
 import axios from '../../config/axios'
+import {LogoutOutlined, DownOutlined, UserOutlined} from '@ant-design/icons';
+import './index.scss'
+import history from "../../config/history";
+import Todo from "../todo/todo";
 
 interface IRouter {
     history: any
@@ -9,6 +13,20 @@ interface IRouter {
 interface IndexState {
     user: any
 }
+
+const logout = () => {
+    history.push('/login')
+}
+const menu = (
+    <Menu>
+        <Menu.Item key="1">
+            个人设置<UserOutlined/>
+        </Menu.Item>
+        <Menu.Item key="2" onClick={logout}>
+            注销 <LogoutOutlined/>
+        </Menu.Item>
+    </Menu>
+);
 
 class Index extends React.Component<IRouter, IndexState> {
     constructor(props: any) {
@@ -39,10 +57,17 @@ class Index extends React.Component<IRouter, IndexState> {
 
     render() {
         return (
-            <div>
-                <div>欢迎</div>
-                <p>{this.state.user.account}</p>
-                <Button type="primary" onClick={this.login}>登出</Button>
+            <div className="index" id="index">
+                <header>
+                    <span>Logo</span>
+                    <Dropdown.Button overlay={menu} icon={<DownOutlined/>}>
+                        {/*<span>{this.state.user.account}</span>*/}
+                        {this.state.user.account}
+                    </Dropdown.Button>
+                </header>
+                <main>
+                    <Todo/>
+                </main>
             </div>
 
         )
