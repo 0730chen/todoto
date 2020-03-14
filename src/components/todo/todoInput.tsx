@@ -29,18 +29,15 @@ class TodoInput extends React.Component<any, TodoInputState> {
     EnterUp = (e: any) => {
         const key = e.keyCode
         if (key === 13 && this.state.description !== '') {
-            console.log('add')
             this.props.addTodo({description: this.state.description})
             this.setState(() => ({
                 description: ''
             }))
         } else {
-            alert('不能为空')
         }
     }
     addTodo = () => {
         if (this.state.description === '') {
-            alert('不能为空')
         } else {
             this.props.addTodo({description: this.state.description})
             this.setState(() => ({
