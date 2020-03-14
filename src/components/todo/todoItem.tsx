@@ -1,13 +1,15 @@
 import React from "react";
 import {Checkbox, Input} from "antd";
 import {EnterOutlined, DeleteOutlined} from '@ant-design/icons';
+import './todoitem.scss'
 
 interface TodoItemProps {
     id: number
     description: string
     completed: boolean
     update: (id: number, params: any) => {}
-    editing: boolean
+    editing: boolean,
+
 }
 
 interface TodoItemState {
@@ -64,7 +66,7 @@ class TodoItem extends React.Component<any, TodoItemState> {
                     </span>
         )
         return (
-            <div>
+            <div className="todoItem" id="todoItem">
                 <Checkbox checked={this.props.completed} onChange={e => {
                     this.update({completed: e.target.checked})
                 }}/>
