@@ -1,7 +1,9 @@
 import React from "react";
 import axios from '../../config/axios'
 import {Input, Button} from 'antd';
-import {UserOutlined, UnlockOutlined} from '@ant-design/icons';
+import {UserOutlined, UnlockOutlined,LockOutlined} from '@ant-design/icons';
+import './signUp.scss'
+import {Link} from "react-router-dom";
 
 
 class SignUp extends React.Component<any> {
@@ -32,10 +34,13 @@ class SignUp extends React.Component<any> {
             passwordConformation: psc
         }))
     }
+    linkTo = ()=>{
+        this.props.history.push('/login')
+    }
     submit = async () => {
         // @ts-ignore
         const {account, password, passwordConformation} = this.state;
-        console.log(account,password,passwordConformation);
+        console.log(account, password, passwordConformation);
         try {
             await axios.post('sign_up/user', {
                 account,
@@ -53,12 +58,14 @@ class SignUp extends React.Component<any> {
         const {account, password, passwordConformation} = this.state;
         return (
             <div className='SignUp'>
+                <h3>土豆时钟</h3>
                 <Input placeholder="请输入你的账号" prefix={<UserOutlined/>} value={account} onChange={this.onChangeAccount}/>
                 <Input.Password placeholder="请输入你的密码" prefix={<UnlockOutlined/>} value={password}
                                 onChange={this.onChangePassword}/>
-                <Input.Password placeholder="确认密码" prefix={<UnlockOutlined/>} value={passwordConformation}
+                <Input.Password placeholder="确认密码" prefix={<LockOutlined/>} value={passwordConformation}
                                 onChange={this.onChangePasswordConformation}/>
-                <Button type="primary" onClick={this.submit}>注册</Button>
+                <Button type="primary" className="register" onClick={this.submit}>注册</Button>
+                <p>如果你有账号，请点击<Link  to="/login" className="login">登陆</Link></p>
             </div>
         )
     }
