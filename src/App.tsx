@@ -4,7 +4,7 @@ import {
     Route,
 } from "react-router-dom";
 import './App.css'
-import Index from "./components/index";
+import Index from "./components/home";
 import Login from "./components/login/login.";
 import SignUp from "./components/signUp/signUp";
 import history from "./config/history";
