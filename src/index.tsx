@@ -4,18 +4,7 @@ import './index.scss'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
-import {createStore} from "redux";
 import store from "./redux/store";
-const reducer = (state = 0, action: any) => {
-    switch (action.type) {
-        case 'INCREMENT':
-            return state + 1;
-        case 'DECREMENT':
-            return state - 1;
-        default:
-            return state;
-    }
-}
 ReactDOM.render(
     <Provider store={store}>
         <App/>

@@ -21,7 +21,6 @@ class TodoInput extends React.Component<any, TodoInputState> {
         this.state = {
             description: ''
         }
-        console.log(this.props);
     }
 
     onChange = (e: any) => {
@@ -72,8 +71,8 @@ const mapStateToProps = (state: any, ownProps: any) => ({
     ...ownProps
 })
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = {
     addTodo
-})
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoInput)
