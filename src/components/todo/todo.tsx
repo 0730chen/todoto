@@ -68,12 +68,12 @@ class Todo extends React.Component <any> {
                 <TodoInput/>
                 <div className="todoList">
                     {this.unCompeltedTodos.map((t: any) => {
-                        return <TodoItem key={t.id} {...t} update={this.updateTodo} toEdit={this.onEdit}/>
+                        return <TodoItem key={t.id} {...t}/>
                     })}
                 </div>
                 <div>
                     {this.CompeltedTodos.map((t: any, index: number) => {
-                        return <TodoItem key={index} {...t} update={this.updateTodo} toEdit={this.onEdit}/>
+                        return <TodoItem key={index} {...t} />
                     })}
                 </div>
             </div>

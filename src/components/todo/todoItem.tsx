@@ -2,7 +2,9 @@ import React from "react";
 import {Checkbox, Input} from "antd";
 import {EnterOutlined, DeleteOutlined} from '@ant-design/icons';
 import './todoitem.scss'
+import {connect} from "react-redux";
 import ClassName from 'classname'
+import {addTodo, initTodos, toEdit, updateTodo} from "../../redux/actions";
 
 interface TodoItemProps {
     id: number
@@ -10,6 +12,7 @@ interface TodoItemProps {
     completed: boolean
     update: (id: number, params: any) => {}
     editing: boolean,
+
 
 }
 
@@ -26,8 +29,7 @@ class TodoItem extends React.Component<any, TodoItemState> {
     }
 
     update = (params: any) => {
-
-        this.props.update(this.props.id, params)
+        this.props.updateTodo(this.props.id, params)
     }
     edit = () => {
         this.props.toEdit(this.props.id)
@@ -83,4 +85,14 @@ class TodoItem extends React.Component<any, TodoItemState> {
     }
 }
 
-export default TodoItem
+const mapStateToProps = (state: any, ownProps: any) => ({
+    todos: state.todos,
+    ...ownProps
+})
+
+const mapDispatchToProps = {
+    updateTodo,
+    toEdit
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoItem)
