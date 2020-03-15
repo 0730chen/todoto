@@ -5,6 +5,7 @@ import './todoitem.scss'
 import {connect} from "react-redux";
 import ClassName from 'classname'
 import {addTodo, initTodos, toEdit, updateTodo} from "../../redux/actions";
+import axios from "../../config/axios";
 
 interface TodoItemProps {
     id: number
@@ -28,8 +29,13 @@ class TodoItem extends React.Component<any, TodoItemState> {
         }
     }
 
-    update = (params: any) => {
-        this.props.updateTodo(this.props.id, params)
+    updateTodo = async (id: number, params: any) => {
+        try {
+            const response = await axios.put(`todos/${id}`, params)
+            this.props.updateTodo(response.data.resource)
+        } catch (e) {
+            throw Error(e)
+        }
     }
     edit = () => {
         this.props.toEdit(this.props.id)
@@ -58,7 +64,7 @@ class TodoItem extends React.Component<any, TodoItemState> {
                 <Input type="text" value={this.state.EditText} onChange={this.onEditText} onKeyUp={this.EnterUp}/>
                 <div className="icon-wrapper">
                     <EnterOutlined onClick={this.EnterUp}/>
-                    <DeleteOutlined onClick={e => this.update({deleted: true})}/>
+                    <DeleteOutlined onClick={e => this.updateTodo(this.props.id, {deleted: true})}/>
                 </div>
             </div>
         )
@@ -75,7 +81,7 @@ class TodoItem extends React.Component<any, TodoItemState> {
         return (
             <div className={todoItemclassNane} id="todoItem" onDoubleClick={this.edit}>
                 <Checkbox checked={this.props.completed} onChange={e => {
-                    this.update({completed: e.target.checked})
+                    this.updateTodo(this.props.id, {completed: e.target.checked})
                 }}/>
                 {this.props.editing ? Edit :
                     span

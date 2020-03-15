@@ -25,7 +25,7 @@ class Todo extends React.Component <any> {
 
     componentDidMount(): void {
         this.getTodos()
-        console.log(this.props);
+
     }
 
     getTodos = async () => {

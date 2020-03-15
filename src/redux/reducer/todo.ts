@@ -15,14 +15,13 @@ const todos = (state: any[] = [], action: any) => {
                 }
             })
         case TO_EDIT:
-            state.forEach(t => {
+            return state.map(t => {
                 if (t.id === action.payload) {
-                    t.editing = true
+                    return Object.assign({}, t, {editing: true})
                 } else {
-                    t.editing = false
+                    return Object.assign({}, t, {editing: false})
                 }
             })
-            return state
 
         default:
             return state;
