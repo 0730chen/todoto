@@ -5,6 +5,7 @@ import axios from '../../config/axios'
 import './todos.scss'
 import TodoItem from "./todoItem";
 import {addTodo} from "../../redux/actions";
+import todo from "../../redux/reducer/todo";
 
 
 interface TodoState {
@@ -112,14 +113,6 @@ class Todo extends React.Component <any, TodoState> {
     }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => ({
-    todos: state.todos,
-    ...ownProps
-})
-
-const mapDispatchToProps = () => ({
-    addTodo
-})
 // const mapStateToProps = (state: any, ownProps: any) => {
 //     ({
 //         todos: state.todos,
@@ -127,4 +120,4 @@ const mapDispatchToProps = () => ({
 //     })
 // }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todo)
+export default connect()(Todo)

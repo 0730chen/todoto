@@ -21,7 +21,7 @@ class TodoInput extends React.Component<any, TodoInputState> {
         this.state = {
             description: ''
         }
-        console.log(this.props)
+        console.log(this.props);
     }
 
     onChange = (e: any) => {
