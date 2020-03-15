@@ -1,18 +1,53 @@
 #todoItem {
   display: flex;
   align-items: center;
-  padding: 8px 0;
+  padding: 8px 0 8px 8px;
   border-bottom: 1px solid #dddddd;
+
+  &:hover {
+    background: #f9f9f9;
+  }
+
+  &.editing {
+    background: #fff3d2;
+  }
+
+  &:first-child {
+    border-top: 1px solid #dddddd;
+  }
+
+  &.completed {
+    > .text-wrapper {
+      text-decoration: line-through;
+      color: #a9a9a9;
+      margin: 0 10px;
+    }
+  }
 
   > .Editer {
     display: flex;
     flex-direction: row;
+    flex: 1;
+    justify-content: space-between;
+    padding: 0 8px;
+
+    > input {
+      border: 0;
+      padding: 0;
+      outline: none;
+      flex: 1;
+      background: transparent;
+    }
 
     > .icon-wrapper {
       display: flex;
       flex-direction: row;
       justify-items: center;
       justify-content: center;
+
+      > span {
+        margin: auto 4px;
+      }
     }
   }
 }

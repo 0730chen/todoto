@@ -2,6 +2,7 @@ import React from "react";
 import {Checkbox, Input} from "antd";
 import {EnterOutlined, DeleteOutlined} from '@ant-design/icons';
 import './todoitem.scss'
+import ClassName from 'classname'
 
 interface TodoItemProps {
     id: number
@@ -29,7 +30,6 @@ class TodoItem extends React.Component<any, TodoItemState> {
         this.props.update(this.props.id, params)
     }
     edit = () => {
-        console.log('edit')
         this.props.toEdit(this.props.id)
     }
     onEditText = (e: any) => {
@@ -62,11 +62,16 @@ class TodoItem extends React.Component<any, TodoItemState> {
         )
         const span = (
             <span className="text-wrapper">
-                    <span onDoubleClick={this.edit}>{this.props.description}</span>
+                    <span>{this.props.description}</span>
                     </span>
         )
+        const todoItemclassNane = ClassName({
+            TodoItem: true,
+            editing: this.props.editing,
+            completed: this.props.completed
+        })
         return (
-            <div className="todoItem" id="todoItem">
+            <div className={todoItemclassNane} id="todoItem" onDoubleClick={this.edit}>
                 <Checkbox checked={this.props.completed} onChange={e => {
                     this.update({completed: e.target.checked})
                 }}/>

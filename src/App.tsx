@@ -3,7 +3,7 @@ import {
     Router,
     Route,
 } from "react-router-dom";
-import './App.css';
+import './App.css'
 import Index from "./components/index";
 import Login from "./components/login/login.";
 import SignUp from "./components/signUp/signUp";
