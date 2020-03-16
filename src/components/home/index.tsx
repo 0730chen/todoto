@@ -5,6 +5,7 @@ import {LogoutOutlined, DownOutlined, UserOutlined} from '@ant-design/icons';
 import './index.scss'
 import history from "../../config/history";
 import Todo from "../todo/todo";
+import TomtoClick from "../tomtoClick/TomtoClick";
 
 interface IRouter {
     history: any
@@ -66,6 +67,7 @@ class Index extends React.Component<IRouter, IndexState> {
                     </Dropdown.Button>
                 </header>
                 <main>
+                    <TomtoClick/>
                     <Todo/>
                 </main>
             </div>

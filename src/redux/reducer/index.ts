@@ -1,3 +1,5 @@
 import {combineReducers} from "redux";
 import todos from './todo'
-export default combineReducers({todos})
+import tomoto from './tomto'
+
+export default combineReducers({todos, tomoto})
