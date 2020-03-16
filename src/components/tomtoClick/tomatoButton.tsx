@@ -29,6 +29,9 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
         } else {
         }
     }
+    onFinish = () => {
+        this.render()
+    }
     description = async () => {
         try {
             const response = await axios.put(`tomatoes/${this.props.unfinedTomato.id}`, {
@@ -60,7 +63,7 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
                 </div>
             } else if (time - startAt < duration) {
                 const timer = duration - time + startAt
-                html = <CouterDown timer={timer}/>
+                html = <CouterDown timer={timer} onFinish={this.onFinish}/>
             }
         }
 
