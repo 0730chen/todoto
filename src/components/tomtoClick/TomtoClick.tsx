@@ -40,6 +40,7 @@ class TomtoClick extends React.Component<ITomatoProps> {
         try {
             const response = await axios.post('tomatoes', {duration: 25 * 60 * 1000})
             console.log(response.data);
+            this.props.updateTomato(response.data.resource)
         } catch (e) {
             throw new Error(e)
         }

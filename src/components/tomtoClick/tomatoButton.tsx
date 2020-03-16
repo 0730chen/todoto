@@ -25,7 +25,6 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
     EnterUp = (e: any) => {
         const key = e.keyCode
         if (key === 13 && this.state.description !== '') {
-            console.log('enter')
             this.description()
         } else {
         }
@@ -56,7 +55,6 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
             const startAt = Date.parse(this.props.unfinedTomato.started_at)
             const duration = this.props.unfinedTomato.duration
             const time = new Date().getTime()
-            console.log(time, startAt, duration)
             if (time - startAt > duration) {
                 html = <div>
                     <Input placeholder="请输入你的任务" value={this.state.description}
