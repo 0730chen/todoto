@@ -2,22 +2,24 @@ import React from "react";
 import {Button} from "antd";
 import axios from '../../config/axios'
 
-class TomatoButton extends React.Component {
+interface ITomatoProps {
+    startTomato: () => void
+    unfinedTomato: () => any
+}
 
-
-    startTomto = async () => {
-        try {
-            const response = await axios.post('tomatoes', {duration: 25 * 60 * 1000})
-            console.log(response.data);
-        } catch (e) {
-            throw new Error(e)
-        }
+class TomatoButton extends React.Component<ITomatoProps> {
+    constructor(props: any) {
+        super(props)
+        console.log(props)
     }
+
 
     render() {
         return (
             <div>
-                <Button onClick={this.startTomto}>开始时间</Button>
+                <Button onClick={() => {
+                    this.props.startTomato()
+                }}>开始时间</Button>
             </div>
         )
     }
