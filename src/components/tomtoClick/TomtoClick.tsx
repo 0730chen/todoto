@@ -6,6 +6,7 @@ import {addTomato, initTomato} from "../../redux/actions";
 import axios from "../../config/axios";
 
 interface ITomatoProps {
+    initTomato: (payload: any) => any,
     tomato: any[],
     addTomato: (payload: any) => any
 }
@@ -26,8 +27,8 @@ class TomtoClick extends React.Component<ITomatoProps> {
     getTomato = async () => {
         try {
             const response = await axios.get('tomatoes')
-            console.log(response.data)
-
+            this.props.initTomato(response.data.resources)
+            console.log(this.props.tomato.filter(t => !t.description && !t.ended_at)[0]);
         } catch (e) {
             throw new Error(e)
 
