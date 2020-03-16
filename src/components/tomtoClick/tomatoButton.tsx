@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Input} from "antd";
 import axios from '../../config/axios'
 import CouterDown from "./CouterDown";
+import CountdownHook from "./CounterDownHooks";
 
 interface ITomatoProps {
     startTomato: () => void
@@ -63,7 +64,7 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
                 </div>
             } else if (time - startAt < duration) {
                 const timer = duration - time + startAt
-                html = <CouterDown timer={timer} onFinish={this.onFinish}/>
+                html = <CountdownHook timer={timer} onFinish={this.onFinish}/>
             }
         }
 
