@@ -5,7 +5,8 @@ import CouterDown from "./CouterDown";
 
 interface ITomatoProps {
     startTomato: () => void
-    unfinedTomato: any
+    unfinedTomato: any,
+    updateTomato: (payload: any) => any
 }
 
 class TomatoButton extends React.Component<ITomatoProps, any> {
@@ -30,8 +31,11 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
     }
     description = async () => {
         try {
-            const response = await axios.put(`tomatoes/${this.props.unfinedTomato.id}`, {description: this.state.description})
-            console.log(response.data);
+            const response = await axios.put(`tomatoes/${this.props.unfinedTomato.id}`, {
+                description: this.state.description,
+                ended_at: new Date()
+            })
+            this.props.updateTomato(response.data.resource)
             this.setState(() => ({
                 description: ''
             }))
@@ -43,18 +47,20 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
     render() {
         let html = <div/>
         if (this.props.unfinedTomato === undefined) {
-            html = <Button className="startTime" onClick={this.props.startTomato}>开始记录</Button>
+            html = <Button className="startTime" onClick={this.props.startTomato}>开始计时</Button>
         } else {
             const startAt = Date.parse(this.props.unfinedTomato.started_at)
             const duration = this.props.unfinedTomato.duration
             const time = new Date().getTime()
+            console.log(time, startAt, duration)
             if (time - startAt > duration) {
                 html = <div>
-                    <Input value={this.state.description}
+                    <Input placeholder="请输入你的任务" value={this.state.description}
                            onChange={e => this.setState({description: e.target.value})} onKeyUp={e => this.EnterUp(e)}/>
                 </div>
             } else if (time - startAt < duration) {
-                html = <CouterDown></CouterDown>
+                const timer = duration - time + startAt
+                html = <CouterDown timer={timer}/>
             }
         }
 

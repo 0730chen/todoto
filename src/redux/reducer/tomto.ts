@@ -1,4 +1,4 @@
-import {ADD_TOMOTO, INIT_TOMATO} from "../actionType";
+import {ADD_TOMOTO, INIT_TOMATO, UPDATE_TOMATO} from "../actionType";
 
 const tomato = (state: any[] = [], action: any) => {
     switch (action.type) {
@@ -6,6 +6,14 @@ const tomato = (state: any[] = [], action: any) => {
             return [...action.payload]
         case ADD_TOMOTO:
             return [action.payload, ...state]
+        case UPDATE_TOMATO:
+            return state.map(t => {
+                if (t.id === action.payload.id) {
+                    return action.payload
+                } else {
+                    return t
+                }
+            })
         default:
             return state
     }
