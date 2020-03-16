@@ -1,7 +1,7 @@
 import React from "react";
 import {Input} from 'antd';
 import {EnterOutlined} from '@ant-design/icons';
-import {addTodo} from "../../redux/actions";
+import {addTodo, updateTodo} from "../../redux/actions";
 import {connect} from "react-redux";
 import axios from '../../config/axios'
 
@@ -38,7 +38,6 @@ class TodoInput extends React.Component<any, TodoInputState> {
     }
     postTodo = async () => {
         if (this.state.description === '') {
-
         } else {
             try {
                 const response = await axios.post('todos', {description: this.state.description})
@@ -49,7 +48,6 @@ class TodoInput extends React.Component<any, TodoInputState> {
             } catch (e) {
                 throw new Error(e)
             }
-            // this.props.addTodo({description: this.state.description}
         }
 
     }

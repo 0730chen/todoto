@@ -3,9 +3,9 @@ import {ADD_TODO, INIT_TODO, UPDATE_TODO, TO_EDIT} from '../actionType'
 const todos = (state: any[] = [], action: any) => {
     switch (action.type) {
         case ADD_TODO:
-            return [...state, action.paylaod]
+            return [...state, action.payload]
         case  INIT_TODO:
-            return [...state, ...action.payload]
+            return [...action.payload]
         case UPDATE_TODO:
             return state.map(t => {
                 if (t.id === action.payload.id) {
@@ -22,7 +22,6 @@ const todos = (state: any[] = [], action: any) => {
                     return Object.assign({}, t, {editing: false})
                 }
             })
-
         default:
             return state;
     }

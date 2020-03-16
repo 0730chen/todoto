@@ -12,20 +12,19 @@ class Todo extends React.Component <any> {
     }
 
     get unDeletedTodos() {
-        return this.props.todos.filter((t: { deleted: any; }) => !t.deleted)
+        return this.props.todos.filter((t: { deleted: boolean; }) => !t.deleted)
     }
 
     get unCompeltedTodos() {
-        return this.props.todos.filter((t: { completed: any; }) => !t.completed)
+        return this.props.todos.filter((t: { completed: boolean; }) => !t.completed)
     }
 
     get CompeltedTodos() {
-        return this.props.todos.filter((t: { completed: any; }) => t.completed)
+        return this.props.todos.filter((t: { completed: boolean; }) => t.completed)
     }
 
     componentDidMount(): void {
         this.getTodos()
-
     }
 
     getTodos = async () => {
@@ -39,28 +38,6 @@ class Todo extends React.Component <any> {
             throw Error(e)
         }
     }
-    updateTodo = async (id: number, params: any) => {
-        try {
-            const response = await axios.put(`todos/${id}`, params)
-            this.props.updateTodo(response.data.resource)
-        } catch (e) {
-            throw Error(e)
-        }
-    }
-    onEdit = (id: number) => {
-        const {todos} = this.props
-        const newTodos = todos.map((t: { id: number; }) => {
-            if (id === t.id) {
-                return Object.assign({}, t, {editing: true})
-            } else {
-                return Object.assign({}, t, {editing: false})
-            }
-        })
-        this.setState(() => ({
-            todos: newTodos
-        }))
-
-    }
 
     render() {
         return (
@@ -71,7 +48,7 @@ class Todo extends React.Component <any> {
                         return <TodoItem key={t.id} {...t}/>
                     })}
                 </div>
-                <div>
+                <div className="todoList">
                     {this.CompeltedTodos.map((t: any, index: number) => {
                         return <TodoItem key={index} {...t} />
                     })}

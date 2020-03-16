@@ -4,7 +4,7 @@ import {EnterOutlined, DeleteOutlined} from '@ant-design/icons';
 import './todoitem.scss'
 import {connect} from "react-redux";
 import ClassName from 'classname'
-import {addTodo, initTodos, toEdit, updateTodo} from "../../redux/actions";
+import {toEdit, updateTodo} from "../../redux/actions";
 import axios from "../../config/axios";
 
 interface TodoItemProps {
@@ -70,7 +70,7 @@ class TodoItem extends React.Component<any, TodoItemState> {
         )
         const span = (
             <span className="text-wrapper">
-                    <span>{this.props.description}</span>
+                <span>{this.props.description}</span>
                     </span>
         )
         const todoItemclassNane = ClassName({
