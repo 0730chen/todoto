@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Input, Modal} from "antd";
 import axios from '../../config/axios'
 import CouterDown from "./CouterDown";
-import {CloseOutlined} from '@ant-design/icons';
+import {CloseOutlined} from '@ant-design/icons'
 import CountdownHook from "./CounterDownHooks";
 import './tomatoButton.scss'
 

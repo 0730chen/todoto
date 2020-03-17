@@ -6,13 +6,13 @@ interface ICounterProps {
     duration: number
 }
 
-interface CouterDownState {
-    countDown: number
-}
 
+// @ts-ignore
 let timeID: NodeJS.Timeout
 
-class CouterDown extends React.Component<ICounterProps, CouterDownState> {
+class CouterDown extends React.Component<ICounterProps, any> {
+    props: any;
+
     constructor(props: any) {
         super(props)
         this.state = {
@@ -30,6 +30,10 @@ class CouterDown extends React.Component<ICounterProps, CouterDownState> {
                 clearInterval(timeID)
             }
         }, 1000)
+    }
+
+    setState(arg0: () => { countDown: number; }) {
+        throw new Error("Method not implemented.");
     }
 
     componentWillUnmount(): void {

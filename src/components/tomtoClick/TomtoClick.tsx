@@ -1,9 +1,12 @@
-import React from "react";
+import React from 'react'
 import './tomto.scss'
 import TomatoButton from "./tomatoButton";
 import {connect} from "react-redux";
 import {addTomato, initTomato, updateTomato} from "../../redux/actions";
 import axios from "../../config/axios";
+import _ from 'lodash'
+import {format, parseISO} from 'date-fns'
+import TomatoList from "./tomatoList";
 
 interface ITomatoProps {
     initTomato: (payload: any) => any,
@@ -12,13 +15,21 @@ interface ITomatoProps {
     updateTomato: (payload: any) => any
 }
 
-class TomtoClick extends React.Component<ITomatoProps> {
+class TomtoClick extends React.Component<ITomatoProps, any> {
     constructor(props: any) {
         super(props)
     }
 
     get unfinedTomato() {
         return this.props.tomato.filter(t => !t.description && !t.ended_at && !t.aborted)[0]
+    }
+
+    get finishedTomatoList() {
+        const finisnedTomato = this.props.tomato.filter(t => t.description && t.ended_at)
+        const obj = _.groupBy(finisnedTomato, (tomato) => {
+            return format((parseISO(tomato.started_at)), 'yyyy-mm-d')
+        })
+        return obj
     }
 
     componentDidMount(): void {
@@ -49,6 +60,7 @@ class TomtoClick extends React.Component<ITomatoProps> {
             <div className="TomtoClick" id="TomtoClick">
                 <TomatoButton startTomato={this.startTomto} unfinedTomato={this.unfinedTomato}
                               updateTomato={this.props.updateTomato}/>
+                <TomatoList finishedTomatoList={this.finishedTomatoList}/>
             </div>
         )
     }

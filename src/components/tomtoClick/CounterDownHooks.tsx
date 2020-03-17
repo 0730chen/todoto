@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 
-let timeID: NodeJS.Timeout
+// @ts-ignore
+let timeID:NodeJS.TimeOut
 const CountdownHook = (props: any) => {
     const [CountDown, setCountDown] = useState(props.timer)
     const min = Math.floor(CountDown / 1000 / 60)
