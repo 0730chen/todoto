@@ -18,7 +18,6 @@ const TomatoItem = (props: any) => {
 class TomatoList extends React.Component<TomatoListProps> {
     constructor(props: any) {
         super(props)
-        console.log(this.props);
     }
 
     get datesSort() {
@@ -27,7 +26,6 @@ class TomatoList extends React.Component<TomatoListProps> {
     }
 
     componentDidMount(): void {
-        console.log(this.props);
     }
 
     render() {

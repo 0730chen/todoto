@@ -1,12 +1,19 @@
 #TomatoList {
   margin-top: 8px;
   border-top: 1px solid #dddddd;
+  >:first-child{
+    margin-top: 16px;
+  }
 
   .Title {
     font-weight: 1000;
   }
 
   .Time-Item {
+    > :first-child {
+      color: #C9C9C9;
+    }
+
     > span {
       margin: 0 8px;
     }
