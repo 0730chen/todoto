@@ -18,7 +18,9 @@ class TomtoClick extends React.Component<ITomatoProps> {
     }
 
     get unfinedTomato() {
-        return this.props.tomato.filter(t => !t.description && !t.ended_at)[0]
+        console.log(this.props.tomato);
+        console.log(this.props.tomato.filter(t => !t.description && !t.ended_at && !t.aborted));
+        return this.props.tomato.filter(t => !t.description && !t.ended_at && !t.aborted)[0]
     }
 
     componentDidMount(): void {
@@ -29,7 +31,6 @@ class TomtoClick extends React.Component<ITomatoProps> {
         try {
             const response = await axios.get('tomatoes')
             this.props.initTomato(response.data.resources)
-            console.log(this.props.tomato.filter(t => !t.description && !t.ended_at)[0]);
         } catch (e) {
             throw new Error(e)
 
@@ -40,7 +41,7 @@ class TomtoClick extends React.Component<ITomatoProps> {
         try {
             const response = await axios.post('tomatoes', {duration: 25 * 60 * 1000})
             console.log(response.data);
-            this.props.updateTomato(response.data.resource)
+            this.props.updateTomato(response.data)
         } catch (e) {
             throw new Error(e)
         }

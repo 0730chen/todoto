@@ -3,6 +3,7 @@ import React from "react";
 interface ICounterProps {
     timer: number,
     onFinish: () => any
+    duration: number
 }
 
 interface CouterDownState {
@@ -24,7 +25,7 @@ class CouterDown extends React.Component<ICounterProps, CouterDownState> {
             let timer = this.state.countDown
             this.setState(() => ({countDown: timer - 1000})
             )
-            if (timer < 0) {
+            if (timer < 1000) {
                 this.props.onFinish()
                 clearInterval(timeID)
             }
@@ -38,8 +39,12 @@ class CouterDown extends React.Component<ICounterProps, CouterDownState> {
     render() {
         const min = Math.floor(this.state.countDown / 1000 / 60)
         const second = Math.floor(this.state.countDown / 1000 % 60)
+        const porcess = 1 - this.state.countDown / this.props.duration
         return (
-            <div>{min}:{second > 10 ? second : `0${second}`}</div>
+            <div className="Countdown" style={{textAlign: "center"}}>
+                <span className="resetTime">{min}:{second > 9 ? second : `0${second}`}</span>
+                <div className="progress" style={{width: `${porcess * 100}%`}}/>
+            </div>
         )
     }
 }

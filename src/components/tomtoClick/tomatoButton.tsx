@@ -1,8 +1,10 @@
 import React from "react";
-import {Button, Input} from "antd";
+import {Button, Input, Modal} from "antd";
 import axios from '../../config/axios'
 import CouterDown from "./CouterDown";
+import {CloseOutlined} from '@ant-design/icons';
 import CountdownHook from "./CounterDownHooks";
+import './tomatoButton.scss'
 
 interface ITomatoProps {
     startTomato: () => void
@@ -14,13 +16,33 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
     constructor(props: any) {
         super(props)
         this.state = {
-            description: ''
+            description: '',
+            visible: false,
         }
     }
 
     componentDidMount(): void {
-        ;
+
     }
+
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = (e: any) => {
+        this.setState({
+            visible: false,
+        });
+        this.updateTomato({aborted: true})
+    };
+
+    handleCancel = (e: any) => {
+        this.setState({
+            visible: false,
+        });
+    };
 
     EnterUp = (e: any) => {
         const key = e.keyCode
@@ -30,25 +52,36 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
         }
     }
     onFinish = () => {
-        this.render()
+        this.forceUpdate()
     }
-    description = async () => {
+    CancelTomato = async () => {
+        this.setState({
+            visible: true,
+        });
+    }
+    updateTomato = async (params: any) => {
         try {
-            const response = await axios.put(`tomatoes/${this.props.unfinedTomato.id}`, {
-                description: this.state.description,
-                ended_at: new Date()
-            })
+            const response = await axios.put(`tomatoes/${this.props.unfinedTomato.id}`, params)
+            console.log(response.data.resource)
             this.props.updateTomato(response.data.resource)
-            this.setState(() => ({
-                description: ''
-            }))
         } catch (e) {
             throw new Error(e)
         }
+
+    }
+    description = () => {
+        this.updateTomato({
+            description: this.state.description,
+            ended_at: new Date()
+        })
+        this.setState(() => ({
+            description: ''
+        }))
     }
 
     render() {
         let html = <div/>
+        console.log(this.props.unfinedTomato);
         if (this.props.unfinedTomato === undefined) {
             html = <Button className="startTime" onClick={this.props.startTomato}>开始计时</Button>
         } else {
@@ -62,7 +95,18 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
                 </div>
             } else if (time - startAt < duration) {
                 const timer = duration - time + startAt
-                html = <CountdownHook timer={timer} onFinish={this.onFinish}/>
+                console.log(timer);
+                html = <div className="Couter-wrapper">
+                    <CouterDown timer={timer} onFinish={this.onFinish} duration={duration}/>
+                    <CloseOutlined onClick={this.CancelTomato}/>
+                    <Modal
+                        title="Basic Modal"
+                        visible={this.state.visible}
+                        onOk={this.handleOk}
+                        onCancel={this.handleCancel} cancelText="取消" okText="确定">
+                        <p>确定要取消倒计时吗</p>
+                    </Modal>
+                </div>
             }
         }
 
