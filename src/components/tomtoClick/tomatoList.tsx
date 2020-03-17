@@ -1,5 +1,6 @@
 import React from "react";
 import {format, parseISO} from 'date-fns'
+import './todoList.scss'
 
 interface TomatoListProps {
     finishedTomatoList: any
@@ -22,7 +23,7 @@ class TomatoList extends React.Component<TomatoListProps> {
 
     get datesSort() {
         const dates = Object.keys(this.props.finishedTomatoList)
-        return dates.sort((a, b) => Date.parse(b) - Date.parse(a))
+        return dates.sort((a, b) => Date.parse(b) - Date.parse(a)).splice(0, 3)
     }
 
     componentDidMount(): void {
@@ -48,7 +49,7 @@ class TomatoList extends React.Component<TomatoListProps> {
 
         })
         return (
-            <div className="TomatoList">
+            <div className="TomatoList" id="TomatoList">
                 {List}
             </div>
         )

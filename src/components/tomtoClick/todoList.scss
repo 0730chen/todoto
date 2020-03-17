@@ -1,0 +1,14 @@
+#TomatoList {
+  margin-top: 8px;
+  border-top: 1px solid #dddddd;
+
+  .Title {
+    font-weight: 1000;
+  }
+
+  .Time-Item {
+    > span {
+      margin: 0 8px;
+    }
+  }
+}
