@@ -62,7 +62,6 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
     updateTomato = async (params: any) => {
         try {
             const response = await axios.put(`tomatoes/${this.props.unfinedTomato.id}`, params)
-            console.log(response.data.resource)
             this.props.updateTomato(response.data.resource)
         } catch (e) {
             throw new Error(e)
@@ -81,7 +80,6 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
 
     render() {
         let html = <div/>
-        console.log(this.props.unfinedTomato);
         if (this.props.unfinedTomato === undefined) {
             html = <Button className="startTime" onClick={this.props.startTomato}>开始计时</Button>
         } else {
@@ -95,7 +93,6 @@ class TomatoButton extends React.Component<ITomatoProps, any> {
                 </div>
             } else if (time - startAt < duration) {
                 const timer = duration - time + startAt
-                console.log(timer);
                 html = <div className="Couter-wrapper">
                     <CouterDown timer={timer} onFinish={this.onFinish} duration={duration}/>
                     <CloseOutlined onClick={this.CancelTomato}/>

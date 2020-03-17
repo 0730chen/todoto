@@ -18,8 +18,6 @@ class TomtoClick extends React.Component<ITomatoProps> {
     }
 
     get unfinedTomato() {
-        console.log(this.props.tomato);
-        console.log(this.props.tomato.filter(t => !t.description && !t.ended_at && !t.aborted));
         return this.props.tomato.filter(t => !t.description && !t.ended_at && !t.aborted)[0]
     }
 
@@ -40,8 +38,7 @@ class TomtoClick extends React.Component<ITomatoProps> {
     startTomto = async () => {
         try {
             const response = await axios.post('tomatoes', {duration: 25 * 60 * 1000})
-            console.log(response.data);
-            this.props.updateTomato(response.data)
+            this.props.addTomato(response.data.resource)
         } catch (e) {
             throw new Error(e)
         }

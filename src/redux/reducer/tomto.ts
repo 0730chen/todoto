@@ -7,7 +7,7 @@ const tomato = (state: any[] = [], action: any) => {
         case ADD_TOMOTO:
             return [action.payload, ...state]
         case UPDATE_TOMATO:
-            console.log(1)
+
             return state.map(t => {
                 if (t.id === action.payload.id) {
                     return action.payload
