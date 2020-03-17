@@ -48,11 +48,11 @@ class Todo extends React.Component <any> {
                         return <TodoItem key={t.id} {...t}/>
                     })}
                 </div>
-                <div className="todoList">
-                    {this.CompeltedTodos.map((t: any, index: number) => {
-                        return <TodoItem key={index} {...t} />
-                    })}
-                </div>
+                {/*<div className="todoList">*/}
+                {/*    {this.CompeltedTodos.map((t: any, index: number) => {*/}
+                {/*        return <TodoItem key={index} {...t} />*/}
+                {/*    })}*/}
+                {/*</div>*/}
             </div>
         )
     }

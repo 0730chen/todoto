@@ -1,0 +1,13 @@
+#Statistics {
+  > ul {
+    display: flex;
+    flex-direction: row;
+
+    li {
+      flex: 1
+    }
+  }
+}
+#finished{
+  font-size: 20px;
+}

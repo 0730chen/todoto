@@ -6,6 +6,7 @@ import './index.scss'
 import history from "../../config/history";
 import Todo from "../todo/todo";
 import TomtoClick from "../tomtoClick/TomtoClick";
+import Statistics from "../Statistics/Statistics";
 
 interface IRouter {
     history: any
@@ -70,6 +71,7 @@ class Index extends React.Component<IRouter, IndexState> {
                     <TomtoClick/>
                     <Todo/>
                 </main>
+                <Statistics></Statistics>
             </div>
 
         )
