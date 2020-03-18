@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import Polygon from "./polygon";
 import _ from "lodash";
 import {format, parseISO} from "date-fns";
+import TodoHistory from "./TodoHistory";
 
 interface StatisticsProps {
     todos: any[]
@@ -39,6 +40,7 @@ class Statistics extends React.Component<StatisticsProps> {
                         <Polygon data={this.dailyTodos} totalFinishedCount={this.finishedTodos.length}/>
                     </li>
                 </ul>
+                <TodoHistory/>
             </div>
         )
     }
