@@ -1,8 +1,53 @@
 .TodoHistory {
 }
+
 .Completed {
   padding: 16px;
   border: 1px solid #cccccc;
   border-radius: 4px;
   margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+  > .summary {
+    padding: 16px;
+
+  }
+
+  > .description {
+    padding: 16px;
+    flex-grow: 1;
+
+    > div {
+      padding: 4px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    > div:hover {
+      background: #C9C9C9;
+    }
+
+  }
+}
+
+.DeletedHistory {
+  padding: 4px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  > .description {
+    flex-grow: 1;
+  }
+
+  > div {
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  > div:hover {
+    background: #C9C9C9;
+  }
 }

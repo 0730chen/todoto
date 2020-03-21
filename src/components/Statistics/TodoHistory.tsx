@@ -69,11 +69,15 @@ class TodoHistory extends React.Component<TodoHistoryProps> {
         const todoList = this.Finishdates.map((date, index) => {
             return (
                 <div key={index} className="Completed">
-                    <div>
-                        {date}
+                    <div className="summary">
+
+                        <div className="date">
+                            <span>{date}</span>
+                            <p>星期</p>
+                        </div>
                         完成了{this.dailyTodo[date].length}个任务
                     </div>
-                    <div>
+                    <div className="description">
                         {this.dailyTodo[date].map((todo, index) => {
                             return <TodoItem key={index} {...todo}/>
                         })}
@@ -83,9 +87,12 @@ class TodoHistory extends React.Component<TodoHistoryProps> {
         })
         const DeletedtodoList = this.DeletedDates.map((date, index) => {
             console.log(this.deletedTodo[index]);
+            console.log(this.deletedTodo)
             return (
                 <div key={index} className="DeletedHistory">
-                    {date}{this.deletedTodo[index].description}
+
+                    <div className="data">{date}</div>
+                    <div className="description">{this.deletedTodo[index].description}</div>
                 </div>
             )
         })
