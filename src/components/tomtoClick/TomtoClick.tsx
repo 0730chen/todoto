@@ -39,7 +39,6 @@ class TomtoClick extends React.Component<ITomatoProps, any> {
     getTomato = async () => {
         try {
             const response = await axios.get('tomatoes')
-            console.log(response.data.resources);
             this.props.initTomato(response.data.resources)
         } catch (e) {
             throw new Error(e)
