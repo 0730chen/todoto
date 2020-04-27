@@ -1,5 +1,7 @@
-import axios from 'axios';
+import axios, {AxiosInstance, AxiosResponse} from 'axios';
 import history from "./history";
+import { message} from 'antd';
+
 const appID = 'aUwMwCAWTGhs5LmqavuoX7y3'
 const appSecret = "PRrvZ4jRDQ17y4LYrxyq1wbn"
 
@@ -24,11 +26,12 @@ instance.interceptors.request.use(function (config) {
 });
 
 // Add a response interceptor
+console.log(message);
 instance.interceptors.response.use(function (response) {
-    // Do something with response data
     if (response.headers['x-token']) {
         localStorage.setItem('x-token', response.headers['x-token'])
     }
+    console.log(response.data)
     return response;
 }, function (error) {
     // Do something with response error
@@ -36,7 +39,7 @@ instance.interceptors.response.use(function (response) {
         console.log('重定向')
         history.push('/login')
     }
-    return Promise.reject(error);
+    return new Error(error)
 });
 
 export default instance

@@ -49,6 +49,7 @@ class Index extends React.Component<IRouter, IndexState> {
     getMe = async () => {
         try {
             const response = await axios.get('/me')
+            console.log(response)
             this.setState((state) => ({
                 user: response.data
             }))
@@ -63,7 +64,6 @@ class Index extends React.Component<IRouter, IndexState> {
                 <header>
                     <span>Logo</span>
                     <Dropdown.Button overlay={menu} icon={<DownOutlined/>}>
-                        {/*<span>{this.state.user.account}</span>*/}
                         {this.state.user.account}
                     </Dropdown.Button>
                 </header>
@@ -71,7 +71,7 @@ class Index extends React.Component<IRouter, IndexState> {
                     <TomtoClick/>
                     <Todo/>
                 </main>
-                <Statistics></Statistics>
+                <Statistics/>
             </div>
 
         )
