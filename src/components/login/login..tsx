@@ -12,14 +12,6 @@ const tailLayout = {
     wrapperCol: {offset: 8, span: 16},
 }
 
-const onFinish = (values: any) => {
-    console.log('Success:', values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-};
-
 class Login extends React.Component<any> {
     constructor(props: any) {
         super(props)
@@ -30,6 +22,14 @@ class Login extends React.Component<any> {
         }
     }
 
+    onFinish = (values: any) => {
+        console.log('Success:', values);
+        this.submit()
+    };
+
+    onFinishFailed = (errorInfo: any) => {
+        console.log('Failed:', errorInfo);
+    };
     onChangeAccount = (e: any) => {
         const account = e.target.value
         this.setState((state) => ({
@@ -68,18 +68,23 @@ class Login extends React.Component<any> {
         return (
             <div className='SignUp'>
                 <h3>土豆时钟</h3>
-                <Form name="login" onFinish={onFinish}
-                      onFinishFailed={onFinishFailed} >
-                    <Form.Item label="用户名" {...layout} rules={[{required: true, message: '请输入你的账号'}]}>
+                <Form {...layout}
+                      name="basic"
+                      initialValues={{remember: true}}
+                      onFinish={this.onFinish}
+                      onFinishFailed={this.onFinishFailed}>
+                    <Form.Item label="用户名" name="username" {...layout} rules={[{required: true, message: '请输入你的账号'}]}>
                         <Input placeholder="请输入你的账号" prefix={<UserOutlined/>} value={account}
                                onChange={this.onChangeAccount}/>
                     </Form.Item>
-                    <Form.Item label="密码" {...layout} rules={[{required: true, message: '请输入你的密码!'}]}>
+                    <Form.Item label="密码" name="password" {...layout} rules={[{required: true, message: '请输入你的密码!'}]}>
                         <Input.Password placeholder="请输入你的密码" prefix={<UnlockOutlined/>} value={password}
                                         onChange={this.onChangePassword}/>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
-                        <Button type="primary" className="register" onClick={this.submit}>登陆</Button>
+                        <Button type="primary"  htmlType={"submit"}>
+                            登 陆
+                        </Button>
                         <p>如果你没有账号，请点击<Link to="/signup" className="login">注册</Link></p>
                     </Form.Item>
                 </Form>
