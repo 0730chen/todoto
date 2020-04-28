@@ -31,12 +31,11 @@ instance.interceptors.response.use(function (response) {
     if (response.headers['x-token']) {
         localStorage.setItem('x-token', response.headers['x-token'])
     }
-    console.log(response.data)
-    return response;
+
+    return response
 }, function (error) {
     // Do something with response error
-    if (error.response.status === 401) {
-        console.log('重定向')
+    if (error.response.status === 401||500) {
         history.push('/login')
     }
     return new Error(error)
